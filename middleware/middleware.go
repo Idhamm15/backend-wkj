@@ -44,7 +44,7 @@ func AuthMiddleware() gin.HandlerFunc {
 }
 
 // AdminMiddleware checks if the user has an admin role
-func AdminMiddleware() gin.HandlerFunc {
+func AdminMiddleware() gin.HandlerFunc  {
 	return func(c *gin.Context) {
 		role, exists := c.Get("role")
 		if !exists || role != "admin" {

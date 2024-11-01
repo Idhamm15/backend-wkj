@@ -13,14 +13,14 @@ import (
 )
 
 type AuthHandler struct {
-	// Add Dependency
+	// Add Dependency if needed
 }
 
 func NewAuthHandler() *AuthHandler {
 	return &AuthHandler{}
 }
 
-
+// Register handles user registration
 func (h *AuthHandler) Register(c *gin.Context) {
 	var user models.User
 
@@ -55,6 +55,7 @@ func (h *AuthHandler) Register(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "User registered successfully", "user": user})
 }
 
+// Login handles user login and token generation
 func (h *AuthHandler) Login(c *gin.Context) {
 	var input models.User
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -79,14 +80,21 @@ func (h *AuthHandler) Login(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": "Login successful", "token": token})
+	c.JSON(http.StatusOK, gin.H{
+		"username":  user.Username,
+		"email": user.Email,
+		"role":user.Role,
+		"token": token,
+	})
 }
 
+// Logout handles user logout
 func (h *AuthHandler) Logout(c *gin.Context) {
-	// Hanya mengembalikan respon sukses karena penghapusan token dilakukan di sisi klien
+	// Simply return a success message as token deletion is handled client-side
 	c.JSON(http.StatusOK, gin.H{"message": "Logout successful"})
 }
 
+// generateToken generates a JWT token for the authenticated user
 func generateToken(user models.User) (string, error) {
 	claims := jwt.MapClaims{
 		"user_id": user.ID,

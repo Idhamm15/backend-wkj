@@ -8,7 +8,7 @@ type Product struct {
 	ID               	uint            `gorm:"primaryKey" json:"id"`
 	Name             	string          `form:"name" json:"name"`
 	Description      	string          `form:"description" json:"description"`
-	Price            	string          `form:"price" json:"price"`
+	Price            	string     		`form:"price" json:"price"`
 	UnitType         	string          `form:"unit_type" json:"unit_type"`
 	ImageURL         	string          `json:"image_url"`
 	ProductCategoryID 	uint           	`json:"product_category_id"`
