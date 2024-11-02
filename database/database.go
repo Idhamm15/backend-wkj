@@ -61,6 +61,8 @@ func Init() {
 		&models.ProductCategory{},
 		&models.Service{},
 		&models.ServiceCategory{},
+		// &models.Utilization{},
+		// &models.Composition{},
 	)
 	if err != nil {
 		log.Fatalf("Error migrating database: %v", err)

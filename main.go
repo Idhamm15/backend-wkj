@@ -29,8 +29,16 @@ func envPortOr(port string) string {
 }
 
 func main() {
+
 	if err := godotenv.Load(); err != nil {
 		log.Fatalf("Error loading .env file: %v", err)
+	}
+
+	// Set Mode
+	ginMode := os.Getenv("GIN_MODE")
+	log.Println("Current GIN_MODE:", ginMode) // Tambahkan log untuk memeriksa nilai
+	if ginMode != "" {
+		gin.SetMode(ginMode)
 	}
 
 	database.Init()
